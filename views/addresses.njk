@@ -1,0 +1,30 @@
+{% extends "govuk/template.njk" %}
+
+{% block head %}
+  <!--[if !IE 8]><!-->
+    <link href="stylesheets/style.css" rel="stylesheet">
+  <!--<![endif]-->
+
+{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">Address lookup</h1>
+  <div class="govuk-form-group">
+    <!-- <label class="govuk-label" for="subject">
+      Choose an address
+    </label> -->
+    <label class="govuk-label" for="postcode">
+      We found <b>{{ addresses.length }}</b> addresses that match your search criteria: <b>{{ postcode }}</b>
+    </label>
+    <select class="govuk-select" id="subject" name="subject" aria-describedby="subject-hint">
+      <option value="choose" selected>Choose address</option>
+      {% for address in addresses %}
+        <option value={{address.id}}>{{ address.name }} - {{ address.populatedPlace }}, {{ address.region }}, {{ address.country }}</option>
+      {% endfor %}
+    </select>
+  </div>
+{% endblock %}
+
+{% block bodyEnd %}
+  <script src="javascripts/javascript.js"></script>
+{% endblock %}
